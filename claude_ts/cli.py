@@ -56,7 +56,7 @@ def main():
         epilog=HELP_EPILOG,
     )
     parser.add_argument("prompt", nargs="*", help="Prompt in your language (empty = REPL mode)")
-    parser.add_argument("-m", "--model", default="", help="Work model (default: claude default)")
+    parser.add_argument("-m", "--model", default="opus", help="Work model (default: opus)")
     parser.add_argument(
         "-t", "--translate-model", default="haiku", help="Translation model (default: haiku)"
     )

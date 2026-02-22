@@ -1,9 +1,17 @@
 # claude-ts
 
-Multilingual translation proxy for Claude Code. Translates user input to English and Claude's output back to your language in real-time, keeping Claude Code's working context in English for optimal performance.
+Multilingual translation proxy for Claude Code.
+
+## Why?
+
+Claude Code works best in English. When you interact in other languages, you waste tokens on multilingual overhead and get worse results — Claude spends context on translating instead of reasoning.
+
+**claude-ts** solves this by adding a cheap translation layer: your input gets translated to English before reaching Claude Code, and the response gets translated back. Claude Code always works in English internally, so it reasons better and uses fewer tokens.
+
+The translation uses Haiku (or a local Ollama model), which costs a fraction of what Opus/Sonnet costs. You get native-language UX without the performance penalty.
 
 ```
-User (any language) → Haiku (translate → EN) → Claude Code (EN) → Haiku (EN → translate) → User (any language)
+You (any language) → Haiku/Ollama (→ EN) → Claude Code (EN context) → Haiku/Ollama (→ your language) → You
 ```
 
 ## Supported Languages
@@ -43,7 +51,7 @@ claude-ts "이 프로젝트 구조 설명해줘"
 claude-ts --lang ja "このプロジェクトを説明して"
 claude-ts --lang zh "解释这个项目"
 
-# Specify model
+# Specify work model (passed to Claude Code)
 claude-ts -m opus "복잡한 리팩토링 해줘"
 
 # All permissions
@@ -82,17 +90,17 @@ Type `/` in REPL to open an interactive menu with arrow-key navigation and type-
 | `/img` | Analyze clipboard image |
 | `/allow` | Change tool permissions (checkbox) |
 | `/debug` | Toggle debug mode |
-| `/reset` | Start new session |
+| `/clear` | Start new session |
 | `/yolo` | Allow all tools |
 | `/export` | Save conversation as markdown |
 | `/copy` | Copy last response to clipboard |
 | `/stats` | Session statistics |
 | `/compact` | Compact conversation context |
-| `/config` | Open Claude Code settings |
 | `/init` | Initialize CLAUDE.md |
 | `/memory` | Edit CLAUDE.md |
 | `/ollama` | Switch translation backend (claude/ollama) |
 | `/rename` | Rename session |
+| `/resume` | Resume previous session |
 | `/doctor` | Check installation health |
 | `/exit` | Exit |
 
@@ -135,6 +143,28 @@ Real-time visualization of Claude Code's tool execution:
 - Edit diff preview
 - Auto-collapse for repeated tools (`Grep ×12 ✓`)
 - Nested sub-agent tree display
+
+## Using Ollama for Translation
+
+By default, translation uses Claude Haiku (API calls). You can use a local Ollama model instead — completely free, no API costs for translation.
+
+**Setup:**
+
+1. Install Ollama: https://ollama.com
+2. Pull a model: `ollama pull gemma3:4b`
+3. Use it:
+
+```bash
+# Via CLI flag (saved automatically for next time)
+claude-ts --ollama gemma3:4b
+
+# Or switch inside REPL
+/ollama
+```
+
+The setting persists in `~/.claude-ts/config.json` — once set, you don't need the flag again.
+
+**Recommended models**: `gemma3:4b` (fast, good quality), `gemma3:12b` (better quality)
 
 ## Translation Engine
 

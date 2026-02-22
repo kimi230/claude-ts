@@ -12,5 +12,8 @@ dependencies = [
     "tiktoken",
 ]
 
+[tool.setuptools.package-data]
+claude_ts = ["languages/*.json"]
+
 [project.scripts]
 claude-ts = "claude_ts.cli:main"
