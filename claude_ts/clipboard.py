@@ -9,7 +9,7 @@ import subprocess
 import sys
 import tempfile
 
-from claude_tokensaver.ui import error, dbg
+from claude_ts.ui import error, dbg
 
 
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tiff", ".tif", ".webp", ".svg"}

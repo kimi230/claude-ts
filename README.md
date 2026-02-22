@@ -1,4 +1,4 @@
-# claude-tokensaver
+# claude-ts
 
 Multilingual translation proxy for Claude Code. Translates user input to English and Claude's output back to your language in real-time, keeping Claude Code's working context in English for optimal performance.
 

@@ -8,8 +8,8 @@ import subprocess
 import urllib.error
 import urllib.request
 
-from claude_tokensaver.ui import error
-from claude_tokensaver.state import _s
+from claude_ts.ui import error
+from claude_ts.state import _s
 
 
 def _ollama_available() -> bool:

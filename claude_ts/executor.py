@@ -12,10 +12,10 @@ import termios
 import threading
 import time
 
-from claude_tokensaver.state import config, SessionState, MAX_CONTEXT_TURNS, clean_env, save_session_record, _s
-from claude_tokensaver.stream_parser import StreamParser
-from claude_tokensaver.ui import C, dim, error, dbg, dbg_block, SpinnerContext, render_markdown
-from claude_tokensaver.translation import contains_target_language, translate
+from claude_ts.state import config, SessionState, MAX_CONTEXT_TURNS, clean_env, save_session_record, _s
+from claude_ts.stream_parser import StreamParser
+from claude_ts.ui import C, dim, error, dbg, dbg_block, SpinnerContext, render_markdown
+from claude_ts.translation import contains_target_language, translate
 
 
 def execute_streaming(prompt: str, state: SessionState) -> str | None:

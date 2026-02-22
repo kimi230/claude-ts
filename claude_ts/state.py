@@ -9,7 +9,7 @@ import threading
 import time
 import uuid
 
-BASE_DIR = os.path.join(os.path.expanduser("~"), ".claude-tokensaver")
+BASE_DIR = os.path.join(os.path.expanduser("~"), ".claude-ts")
 SESSIONS_DIR = os.path.join(BASE_DIR, "sessions")
 CONFIG_FILE = os.path.join(BASE_DIR, "config.json")
 BUNDLED_LANGUAGES_DIR = os.path.join(os.path.dirname(__file__), "languages")
@@ -101,7 +101,7 @@ _s = get_ui_string
 
 
 def load_user_config() -> dict:
-    """Load user config from ~/.claude-tokensaver/config.json."""
+    """Load user config from ~/.claude-ts/config.json."""
     if not os.path.isfile(CONFIG_FILE):
         return {}
     try:
@@ -112,7 +112,7 @@ def load_user_config() -> dict:
 
 
 def save_user_config(data: dict):
-    """Save user config to ~/.claude-tokensaver/config.json (atomic write)."""
+    """Save user config to ~/.claude-ts/config.json (atomic write)."""
     import tempfile
     os.makedirs(BASE_DIR, exist_ok=True)
     try:

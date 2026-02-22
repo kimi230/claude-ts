@@ -11,14 +11,14 @@ import termios
 import threading
 import time
 
-from claude_tokensaver.state import config, SessionState, clean_env, list_session_records, _s, available_languages, load_language, save_user_config
-from claude_tokensaver.tokens import fmt_tokens
-from claude_tokensaver.ui import C, dim, error, success, render_markdown, SpinnerContext
-from claude_tokensaver.clipboard import get_clipboard_image
-from claude_tokensaver.ollama import _ollama_available, _ollama_list_models
-from claude_tokensaver.executor import execute_streaming, process_image_turn
-from claude_tokensaver.translation import translate
-from claude_tokensaver.menus import interactive_tool_selector
+from claude_ts.state import config, SessionState, clean_env, list_session_records, _s, available_languages, load_language, save_user_config
+from claude_ts.tokens import fmt_tokens
+from claude_ts.ui import C, dim, error, success, render_markdown, SpinnerContext
+from claude_ts.clipboard import get_clipboard_image
+from claude_ts.ollama import _ollama_available, _ollama_list_models
+from claude_ts.executor import execute_streaming, process_image_turn
+from claude_ts.translation import translate
+from claude_ts.menus import interactive_tool_selector
 
 
 def _run_cancellable(cmd: list[str], timeout: int = 300,
@@ -152,7 +152,7 @@ def cmd_exit(state: SessionState, args: str) -> bool:
 
 
 def cmd_help(state: SessionState, args: str) -> bool:
-    print(f"  {C.BOLD}━━━ claude-tokensaver help ━━━{C.RESET}")
+    print(f"  {C.BOLD}━━━ claude-ts help ━━━{C.RESET}")
     print(f"  {C.DIM}{_s('label_slash_hint', 'Type / to see command list')}{C.RESET}")
     print()
     print(f"  {C.BOLD}{_s('label_basic_commands', 'Basic Commands')}{C.RESET}")

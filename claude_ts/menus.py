@@ -8,9 +8,9 @@ import sys
 import termios
 import tty
 
-from claude_tokensaver.ui import C
-from claude_tokensaver.terminal import _read_esc_seq
-from claude_tokensaver.state import _s
+from claude_ts.ui import C
+from claude_ts.terminal import _read_esc_seq
+from claude_ts.state import _s
 
 
 def get_slash_commands() -> list[tuple[str, str]]:
@@ -287,7 +287,7 @@ def interactive_tool_selector() -> str:
 
 def ask_permission_mode():
     """Ask user about tool permissions at startup."""
-    from claude_tokensaver.state import config
+    from claude_ts.state import config
 
     print(f"  {C.BOLD}{_s('label_tool_permission', 'Tool Permission Setup')}{C.RESET}")
     print(f"    {C.CYAN}1{C.RESET}) {_s('label_select_allow', 'Selective — choose tools to allow')}")
@@ -301,17 +301,17 @@ def ask_permission_mode():
 
     if choice == "2":
         config.dangerously_skip_permissions = True
-        from claude_tokensaver.ui import success
+        from claude_ts.ui import success
         success(f"  {_s('msg_full_allow_mode', 'Full access (--dangerously-skip-permissions)')}")
     else:
         print()
         tools = interactive_tool_selector()
         if tools:
             config.allowed_tools = tools
-            from claude_tokensaver.ui import success
+            from claude_ts.ui import success
             success(f"  {_s('msg_allowed_tools', 'Allowed tools')}: {tools}")
         else:
-            from claude_tokensaver.ui import dim
+            from claude_ts.ui import dim
             dim(f"  {_s('msg_no_tools', 'No tools allowed — read-only mode')}")
 
     print()

@@ -1,6 +1,1 @@
-#!/usr/bin/env python3
 # claude-ts — Multilingual translation proxy for Claude Code
-
-from claude_ts.cli import main
-
-main()

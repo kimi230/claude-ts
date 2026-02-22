@@ -2,8 +2,8 @@
 
 import sys
 
-from claude_tokensaver.state import available_languages, save_user_config, config
-from claude_tokensaver.ui import C
+from claude_ts.state import available_languages, save_user_config, config
+from claude_ts.ui import C
 
 
 def select_language() -> str:
@@ -53,6 +53,6 @@ def select_language() -> str:
     save_user_config({"language": selected["code"]})
     config.language = selected["code"]
 
-    print(f"  {C.GREEN}✓{C.RESET} {selected['name']} ({selected['name_en']}) — saved to ~/.claude-tokensaver/config.json")
+    print(f"  {C.GREEN}✓{C.RESET} {selected['name']} ({selected['name_en']}) — saved to ~/.claude-ts/config.json")
     print()
     return selected["code"]

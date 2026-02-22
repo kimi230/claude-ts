@@ -4,13 +4,13 @@ import os
 import sys
 import time
 
-from claude_tokensaver.state import config, SessionState, _s
-from claude_tokensaver.ui import C, dim, error, success
-from claude_tokensaver.clipboard import drain_stdin, detect_image_path, get_clipboard_image, stabilize_image_path
-from claude_tokensaver.terminal import read_input
-from claude_tokensaver.menus import slash_menu_raw, interactive_command_menu, ask_permission_mode
-from claude_tokensaver.commands import dispatch
-from claude_tokensaver.executor import process_image_turn, process_turn
+from claude_ts.state import config, SessionState, _s
+from claude_ts.ui import C, dim, error, success
+from claude_ts.clipboard import drain_stdin, detect_image_path, get_clipboard_image, stabilize_image_path
+from claude_ts.terminal import read_input
+from claude_ts.menus import slash_menu_raw, interactive_command_menu, ask_permission_mode
+from claude_ts.commands import dispatch
+from claude_ts.executor import process_image_turn, process_turn
 
 
 def repl():

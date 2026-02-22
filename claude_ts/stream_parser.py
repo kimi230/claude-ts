@@ -11,9 +11,9 @@ import threading
 import time
 import unicodedata
 
-from claude_tokensaver.state import config, _s
-from claude_tokensaver.tokens import estimate_tokens, fmt_tokens
-from claude_tokensaver.ui import C, SPINNER, dbg
+from claude_ts.state import config, _s
+from claude_ts.tokens import estimate_tokens, fmt_tokens
+from claude_ts.ui import C, SPINNER, dbg
 
 
 _ANSI_RE = re.compile(r"\033\[[0-9;]*[A-Za-z]")

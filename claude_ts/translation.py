@@ -6,12 +6,12 @@ import re
 import subprocess
 import sys
 
-from claude_tokensaver.state import (
+from claude_ts.state import (
     config, clean_env, load_language, detect_language, get_ui_string,
     MAX_CONTEXT_TURNS, MAX_CONTEXT_CHARS,
 )
-from claude_tokensaver.ui import C, error
-from claude_tokensaver.ollama import _ollama_generate
+from claude_ts.ui import C, error
+from claude_ts.ollama import _ollama_generate
 
 
 # ── Translation Prompt Suffixes (language-agnostic) ─────────────────────────

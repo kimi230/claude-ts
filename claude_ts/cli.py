@@ -5,12 +5,12 @@ import readline  # noqa: F401 — imported for side-effect (enables line editing
 import subprocess
 import sys
 
-from claude_tokensaver.state import config, SessionState, clean_env, init_language, init_translation_backend, get_ui_string
-from claude_tokensaver.ui import dim, error
-from claude_tokensaver.ollama import _ollama_available, _ollama_list_models
-from claude_tokensaver.executor import process_turn
-from claude_tokensaver.repl import repl
-from claude_tokensaver.setup import select_language
+from claude_ts.state import config, SessionState, clean_env, init_language, init_translation_backend, get_ui_string
+from claude_ts.ui import dim, error
+from claude_ts.ollama import _ollama_available, _ollama_list_models
+from claude_ts.executor import process_turn
+from claude_ts.repl import repl
+from claude_ts.setup import select_language
 
 
 HELP_EPILOG = """\
@@ -51,7 +51,7 @@ Examples:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="claude-tokensaver — Multilingual translation proxy for Claude Code",
+        description="claude-ts — Multilingual translation proxy for Claude Code",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=HELP_EPILOG,
     )

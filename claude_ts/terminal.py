@@ -9,8 +9,8 @@ import termios
 import tty
 import unicodedata
 
-from claude_tokensaver.clipboard import stabilize_image_path, _clean_path, IMAGE_EXTS
-from claude_tokensaver.ui import C
+from claude_ts.clipboard import stabilize_image_path, _clean_path, IMAGE_EXTS
+from claude_ts.ui import C
 
 
 def _char_width(c: str) -> int:
