@@ -30,10 +30,7 @@ You (any language) → Haiku/Ollama (→ EN) → Claude Code (EN context) → Ha
 ## Install
 
 ```bash
-pip install git+https://github.com/kimi230/claude-kr.git
-
-# Optional: accurate token counting
-pip install tiktoken
+pip install claude-ts
 ```
 
 Requires [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code).
