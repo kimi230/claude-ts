@@ -1,5 +1,7 @@
 """Terminal input with bracketed paste detection."""
 
+from __future__ import annotations
+
 import os
 import select
 import sys
@@ -7,11 +9,14 @@ import termios
 import tty
 import unicodedata
 
-from claude_kr.ui import C
+from claude_tokensaver.clipboard import stabilize_image_path, _clean_path, IMAGE_EXTS
+from claude_tokensaver.ui import C
 
 
 def _char_width(c: str) -> int:
     """Display width of a character (2 for CJK fullwidth, 1 otherwise)."""
+    if len(c) != 1:
+        return sum(_char_width(ch) for ch in c)
     w = unicodedata.east_asian_width(c)
     return 2 if w in ("W", "F") else 1
 
@@ -72,8 +77,20 @@ def read_input(prompt_str: str, slash_handler=None) -> tuple[str, bool]:
                     is_paste = True
                 elif seq == b"\x1b[201~":
                     in_paste = False
-                    # Show paste label inline, keep cursor on same line
                     paste_text = "".join(paste_parts)
+
+                    # Immediately stabilize volatile image paths
+                    # (macOS temp screenshots vanish in seconds)
+                    cleaned = _clean_path(paste_text)
+                    ext = os.path.splitext(cleaned)[1].lower()
+                    if ext in IMAGE_EXTS and cleaned.startswith("/"):
+                        stable = stabilize_image_path(cleaned)
+                        if stable != cleaned:
+                            paste_parts.clear()
+                            paste_parts.append(stable)
+                            paste_text = stable
+
+                    # Show paste label inline, keep cursor on same line
                     n_lines = paste_text.count("\n") + 1
                     n_chars = len(paste_text)
                     if n_lines > 1:

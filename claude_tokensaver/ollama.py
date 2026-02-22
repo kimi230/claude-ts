@@ -1,12 +1,15 @@
 """Ollama local model helpers."""
 
+from __future__ import annotations
+
 import json
 import shutil
 import subprocess
 import urllib.error
 import urllib.request
 
-from claude_kr.ui import error
+from claude_tokensaver.ui import error
+from claude_tokensaver.state import _s
 
 
 def _ollama_available() -> bool:
@@ -53,11 +56,11 @@ def _ollama_generate(prompt: str, model: str) -> str | None:
             body = json.loads(resp.read().decode("utf-8"))
             return body.get("response", "").strip() or None
     except urllib.error.URLError as e:
-        error(f"Ollama 서버 연결 실패: {e.reason}")
+        error(f"{_s('err_ollama_connect', 'Ollama server connection failed')}: {e.reason}")
         return None
     except json.JSONDecodeError:
-        error("Ollama 응답 파싱 실패")
+        error(_s("err_ollama_parse", "Ollama response parse failed"))
         return None
     except TimeoutError:
-        error("Ollama 응답 시간 초과 (120초)")
+        error(_s("err_ollama_timeout", "Ollama response timeout (120s)"))
         return None

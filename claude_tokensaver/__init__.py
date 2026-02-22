@@ -1,6 +1,1 @@
-#!/usr/bin/env python3
 # claude-tokensaver — Multilingual translation proxy for Claude Code
-
-from claude_tokensaver.cli import main
-
-main()

@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "claude-tokensaver"
+version = "0.2.0"
+description = "Multilingual translation proxy for Claude Code — save tokens by translating to/from English"
+requires-python = ">=3.9"
+dependencies = [
+    "rich",
+    "tiktoken",
+]
+
+[project.scripts]
+claude-tokensaver = "claude_tokensaver.cli:main"
+claude-ts = "claude_tokensaver.cli:main"

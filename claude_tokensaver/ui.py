@@ -1,5 +1,7 @@
 """ANSI colors, output helpers, markdown rendering, spinner."""
 
+from __future__ import annotations
+
 import sys
 import threading
 
@@ -8,7 +10,7 @@ from rich.markdown import Markdown
 from rich.padding import Padding
 from rich.theme import Theme
 
-from claude_kr.state import config
+from claude_tokensaver.state import config
 
 
 # ── Rich console ────────────────────────────────────────────────────────────
@@ -46,7 +48,8 @@ def dim(msg: str):
 
 
 def error(msg: str):
-    print(f"  {C.RED}[오류] {msg}{C.RESET}", file=sys.stderr, flush=True)
+    from claude_tokensaver.state import _s
+    print(f"  {C.RED}[{_s('err_prefix', 'Error')}] {msg}{C.RESET}", file=sys.stderr, flush=True)
 
 
 def success(msg: str):
