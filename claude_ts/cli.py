@@ -5,7 +5,7 @@ import readline  # noqa: F401 — imported for side-effect (enables line editing
 import subprocess
 import sys
 
-from claude_ts.state import config, SessionState, clean_env, init_language, init_translation_backend, get_ui_string
+from claude_ts.state import config, SessionState, clean_env, init_language, init_translation_backend, get_ui_string, save_user_config
 from claude_ts.ui import dim, error
 from claude_ts.ollama import _ollama_available, _ollama_list_models
 from claude_ts.executor import process_turn
@@ -115,6 +115,7 @@ def main():
             sys.exit(1)
         config.translate_backend = "ollama"
         config.ollama_model = args.ollama
+        save_user_config({"translate_backend": "ollama", "ollama_model": args.ollama})
 
     # Verify claude is available
     try:
