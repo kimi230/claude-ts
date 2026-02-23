@@ -36,13 +36,16 @@ def _ollama_list_models() -> list[str]:
         return []
 
 
-def _ollama_generate(prompt: str, model: str) -> str | None:
+def _ollama_generate(prompt: str, model: str, system: str | None = None) -> str | None:
     """Call Ollama's /api/generate endpoint (non-streaming)."""
-    payload = json.dumps({
+    body: dict = {
         "model": model,
         "prompt": prompt,
         "stream": False,
-    }).encode("utf-8")
+    }
+    if system:
+        body["system"] = system
+    payload = json.dumps(body).encode("utf-8")
 
     req = urllib.request.Request(
         "http://localhost:11434/api/generate",

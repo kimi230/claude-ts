@@ -123,11 +123,15 @@ def translate(text: str, direction: str,
         else:
             prompt = to_en_prompt + _TO_EN_SUFFIX.format(text=text)
     else:
-        prompt = from_en_prompt + text
+        prompt = from_en_prompt + f"\n<translate>\n{text}\n</translate>"
 
     # ── Ollama backend ──
     if config.translate_backend == "ollama" and config.ollama_model:
-        translated = _ollama_generate(prompt, config.ollama_model)
+        if direction == "kr2en":
+            ollama_system = to_en_prompt
+        else:
+            ollama_system = from_en_prompt
+        translated = _ollama_generate(text, config.ollama_model, system=ollama_system)
         if translated:
             if shielded_links:
                 translated = _unshield_links(translated, shielded_links)
